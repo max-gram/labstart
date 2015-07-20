@@ -1,3 +1,20 @@
-#tmp{
-  display: flex;
+.swiper-container {
+    position: absolute;
+    top:50%;
+    left:50%;
+    width: 600px;
+    height: 300px;
+    transform: translate(-50%, -50%);
+
+    .swiper-slide{
+      &.s1{
+        background-color: red;
+      }
+      &.s2{
+        background-color: green;
+      }
+      &.s3{
+        background-color: blue;
+      }
+    }
 }

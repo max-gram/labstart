@@ -11,6 +11,7 @@ module.exports = function(grunt) {
       dev: '.tmp',
       dist: 'release',
       server: '127.0.0.1',
+      // server: '10.3.1.41',
       port: 9000,
     },
 
@@ -40,15 +41,15 @@ module.exports = function(grunt) {
 
     copy:{
       dev:{
-        src: '<%= config.src %>/index.html',
-        dest: '<%= config.dev %>/index.html',
-        filter: 'isFile'
+        'src': '<%= config.src %>/index.html',
+        'dest': '<%= config.dev %>/index.html',
+        'filter': 'isFile'
       },
 
       dist:{
-        src: '<%= config.src %>/index.html',
-        dest: '<%= config.dist %>/index.html',
-        filter: 'isFile'
+        'src': '<%= config.src %>/index.html',
+        'dest': '<%= config.dist %>/index.html',
+        'filter': 'isFile'
       }
     },
 
@@ -57,9 +58,12 @@ module.exports = function(grunt) {
         'options': {
           'plugins' : [ new (require('less-plugin-autoprefix'))({browsers : [ "last 2 versions" ]}) ],
           'compress': true,
+          'cleancss': false,
           'sourceMap': true,
           'sourceMapFilename': '<%= config.dev %>/css/main.css.map',
-          'sourceMapBasepath': '<%= config.dev %>/',
+          'sourceMapURL': 'main.css.map',
+          'sourceMapBasepath': '<%= config.dev %>',
+          'sourceMapRootpath': '/'
         },
         'files': {
           '<%= config.dev %>/css/main.css': '<%= config.src %>/com/less/main.less'
@@ -67,6 +71,7 @@ module.exports = function(grunt) {
       },
       dist: {
         'options': {
+          'plugins' : [ new (require('less-plugin-autoprefix'))({browsers : [ "last 2 versions" ]}) ],
           'compress': true,
           'cleancss': true,
         },
@@ -78,27 +83,26 @@ module.exports = function(grunt) {
 
     connect: {
       devServer: {
-        options: {
-          base: '<%= config.dev %>/',
-          port: '<%= config.port %>',
-          hostname: '<%= config.server %>',
-          livereload: true,
-          keepalive: true
+        'options': {
+          'base': '<%= config.dev %>/',
+          'port': '<%= config.port %>',
+          'hostname': '<%= config.server %>'
         }
       }
     },
 
     browserify: {
-      options: {
-        transform: ['brfs']
-      },
       dev: {
         'src': '<%= config.src %>/index.js',
         'dest': '<%= config.dev %>/js/bundle.js',
         'options': {
           'debug': true,
+          'watch': true,
           'verbose': true,
-          'open': true
+          'open': true,
+          'browserifyOptions': {
+            'debug': true
+          }
         }
       },
       dist: {
@@ -108,28 +112,43 @@ module.exports = function(grunt) {
           'debug': false,
           'verbose': false
         }
-      },
-      // preloader: {
-      // 'src': 'src/preloader.js',
-      // 'dest': 'app/js/preloader.js',
-      // 'options': {
-      // 'debug': false,
-      // 'verbose': false
-      // }
-      // }
+      }
     },
 
+    // jshint: {
+    // TODO: ADD BROWSERIFY Compability
+    //   all: {
+    //     'src': '<%= config.src %>/**/*.js'
+    //   }
+    // },
 
+    watch: {
+      options: {
+        livereload: true
+      },
+      'less': {
+        'files': ['<%= config.src %>/**/*.less'],
+        'tasks': ['less:dev']
+      },
+      'browserify': {
+        'files': [
+          '<%= config.src %>/**/*.js',
+          '*.js'
+        ],
+        // 'tasks': ['newer:jshint:all','browserify:dev']
+        'tasks': ['browserify:dev']
+      }
+    },
   // CONFIG END
   });
 
   grunt.registerTask('default',[
-    // 'licensechecker',
-    // 'clean:dev',
-    // 'copy:dev',
-    'less:dev',
-    //
-    // 'connect',
-
+    'licensechecker',
+    'clean:dev',
+    'copy:dev',
+    'newer:less:dev',
+    'newer:browserify:dev',
+    'connect',
+    'watch'
   ]);
 };

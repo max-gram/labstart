@@ -2,16 +2,41 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Lab Start</title>
+    <title>Lab Start aka Sandbox</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta property="og:title" content="Lab Start" />
     <meta property="og:description" content="Sandbox for your experiments." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="http://localhost" />
-    <meta property="og:image" content="http://images.clipartpanda.com/smiley-face-clip-art-niXoRMbiB.png" />
+    <meta property="og:url" content="" />
+    <meta property="og:image" content="" />
+
+    <link rel="stylesheet" href="css/main.css">
   </head>
 
   <body>
-    Hello World!
-  </body>
+    <!-- Slider main container -->
+    <div class="swiper-container">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide s1">Slide 1</div>
+            <div class="swiper-slide s2">Slide 2</div>
+            <div class="swiper-slide s3">Slide 3</div>
+        </div>
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
 
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+
+        <!-- If we need scrollbar - ->
+        <div class="swiper-scrollbar"></div-->
+    </div>
+  </body>
+  <script type="text/javascript" src="js/bundle.js"></script>
+
+  <!-- REMOVE FOR PROD -->
+  <script src="http://localhost:35729/livereload.js"></script>
+  <!-- END REMOVE FOR PROD -->
 </html>

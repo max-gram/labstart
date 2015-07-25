@@ -17,9 +17,6 @@ var LandingPage = {
       // Navigation arrows
       nextButton: '.swiper-button-next',
       prevButton: '.swiper-button-prev',
-
-      // And if we need scrollbar
-      // scrollbar: '.swiper-scrollbar',
     });
   }
 };

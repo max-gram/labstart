@@ -1,7 +1,7 @@
 
 BrowserifyJS VS RequreJS
 ==============================
-Start point for your experiments. Starting from closer look at popular module [ isolated and arbitrarily complex piece of code ] loaders BrowserifyJS and RequreJS. Checkout requirejs branch to see the difference.
+A closer look at popular module [ isolated and arbitrarily complex piece of code ] loaders BrowserifyJS and RequreJS.
 
 
 BrowserifyJS (CommonJS)

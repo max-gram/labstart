@@ -4,18 +4,17 @@ A closer look at popular module [ isolated and arbitrarily complex piece of code
 
 
 BrowserifyJS (CommonJS)
-==============================
+------------------------------
 [Browserify](http://browserify.org) lets you require('modules') in the browser by bundling up all of your dependencies.
 
 RequreJS (AMD)
-==============================
+------------------------------
 [RequireJS](http://requirejs.org) is a JavaScript file and module loader. It is optimized for in-browser use, but it can be used in other JavaScript environments, like Rhino and Node.
 
 Pros & Cons of BrowserifyJS
-==============================
-
-Pros (BrowserifyJS wins)
 ------------------------------
+
+### Pros (BrowserifyJS wins)
 - Simple
 - Node-style module exporting. More readable syntax [ ES6 alike ]
 - NPM (168,872 packages as of Jul 27,2015)
@@ -25,16 +24,14 @@ Pros (BrowserifyJS wins)
 - Ability to create isomorphic applications
 
 
-Cons (RequreJS wins)
-------------------------------
+### Cons (RequreJS wins)
 - No dynamic path aliases. Imposible to
     require('./path/'+ filename +'.js');
 - No 'Lazy load'
 - Must use a watcher tool for the builds.
 - Documentation (Lots of things are assumed that you know already )
 
-Sourcemaps
-------------------------------
+### Sourcemaps
 Both RequireJS and Browserify have support for sourcemaps, which is of fundamental importance for the debugging of in production applications.
 
 

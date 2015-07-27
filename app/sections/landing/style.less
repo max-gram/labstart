@@ -1,20 +1,27 @@
-.swiper-container {
-    position: absolute;
-    top:50%;
-    left:50%;
-    width: 600px;
-    height: 300px;
-    transform: translate(-50%, -50%);
+.colors{
+  display: flex;
+  width: 100%;
+  height: 50px;
+  .palette{
+    width: 20%;
+    flex-shrink: 0;
+    flex-grow: 0;
 
-    .swiper-slide{
-      &.s1{
-        background-color: red;
-      }
-      &.s2{
-        background-color: green;
-      }
-      &.s3{
-        background-color: blue;
-      }
+    &.one{
+      background-color: red;
     }
+
+    &.two{
+      background-color: blue;
+    }
+    &.three{
+      background-color: green;
+    }
+    &.four{
+      background-color: yellow;
+    }
+    &.five{
+      background-color: brown;
+    }
+  }
 }

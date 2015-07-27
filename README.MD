@@ -26,7 +26,10 @@ Pros & Cons of BrowserifyJS
 
 
 ### Cons (RequreJS wins)
-- No dynamic path aliases. Imposible to require('./path/'+ filename +'.js');
+- No dynamic path aliases. Imposible to
+```
+require('./path/'+ filename +'.js');
+```
 - No 'Lazy load'
 - Must use a watcher tool for the builds.
 - Documentation (Lots of things are assumed that you know already )
@@ -44,6 +47,6 @@ Alternative to investigate
 
 More info
 ==============================
-- [Comparison](https://webpack.github.io/docs/comparison.html)
+- [Webpack, BrowserifyJS and RequireJS Comparison](https://webpack.github.io/docs/comparison.html)
 - [Module loaders e package managers](http://www.leanpanda.com/blog/2015/06/28/amd-requirejs-commonjs-browserify/)
 - [Isomorphic JavaScript](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/)

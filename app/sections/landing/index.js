@@ -4,6 +4,10 @@ define(['swiper'], function (swiper) {
   var landing = {
     init: function(){
       console.log('Landing Page Init');
+      this.setSwiper();
+    },
+
+    setSwiper: function(){
       var mySwiper = new Swiper ('.swiper-container', {
         direction: 'horizontal',
         loop: true,
@@ -11,7 +15,7 @@ define(['swiper'], function (swiper) {
         nextButton: '.swiper-button-next',
         prevButton: '.swiper-button-prev',
       });
-    },
+    }
 
   };
 

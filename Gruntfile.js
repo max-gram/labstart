@@ -41,9 +41,10 @@ module.exports = function(grunt) {
 
     copy:{
       dev:{
-        'src': '<%= config.src %>/index.html',
-        'dest': '<%= config.dev %>/index.html',
-        'filter': 'isFile'
+        files: [
+          {expand: false, src: ['<%= config.src %>/index.html'], dest: '<%= config.dev %>/index.html', filter: 'isFile'},
+          {expand: false, src: ['<%= config.src %>/com/libs/require.js'], dest: '<%= config.dev %>/js/require.js', filter: 'isFile'},
+        ]
       },
 
       dist:{
@@ -86,41 +87,26 @@ module.exports = function(grunt) {
         'options': {
           'base': '<%= config.dev %>/',
           'port': '<%= config.port %>',
-          'hostname': '<%= config.server %>'
+          'hostname': '<%= config.server %>',
+          'keepalive': true
         }
       }
     },
 
-    browserify: {
-      dev: {
-        'src': '<%= config.src %>/index.js',
-        'dest': '<%= config.dev %>/js/bundle.js',
-        'options': {
-          'debug': true,
-          'watch': true,
-          'verbose': true,
-          'open': true,
-          'browserifyOptions': {
-            'debug': true
-          }
-        }
-      },
-      dist: {
-        'src': '<%= config.src %>/index.js',
-        'dest': '<%= config.dist %>/js/bundle.js',
-        'options': {
-          'debug': false,
-          'verbose': false
+    requirejs: {
+      compile: {
+        options: {
+          baseUrl: '.',
+          appDir: './app',
+          dir: './.tmp',
+          mainConfigFile: './app/index.js',
+          optimize: 'uglify',
+          preserveLicenseComments: true,
+          useStrict: true,
+          removeCombined: true
         }
       }
     },
-
-    // jshint: {
-    // TODO: ADD BROWSERIFY Compability
-    //   all: {
-    //     'src': '<%= config.src %>/**/*.js'
-    //   }
-    // },
 
     watch: {
       options: {
@@ -130,26 +116,14 @@ module.exports = function(grunt) {
         'files': ['<%= config.src %>/**/*.less'],
         'tasks': ['less:dev']
       },
-      'browserify': {
-        'files': [
-          '<%= config.src %>/**/*.js',
-          '*.js'
-        ],
-        // 'tasks': ['newer:jshint:all','browserify:dev']
-        'tasks': ['browserify:dev']
-      }
     },
   // CONFIG END
   });
 
   grunt.registerTask('default',[
-    'check-modules',
-    'licensechecker',
     'clean:dev',
-    'copy:dev',
+    'requirejs',
     'newer:less:dev',
-    'newer:browserify:dev',
     'connect',
-    'watch'
   ]);
 };

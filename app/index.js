@@ -1,8 +1,23 @@
-'use strict';
-var domready = require('detect-dom-ready');
-var LandingP = require('./sections/landing');
+requirejs.config({
+  baseUrl: '',
 
-domready(function() {
+  paths: {
+    'requirejs': './com/libs/require',
+    'swiper': './com/libs/swiper/swiper',
+    'landing': './sections/landing/index',
+  },
+
+  modules: [{
+    name: 'index',
+    exclude: ['swiper'],
+    include: ['requirejs']
+  }],
+});
+
+require(['landing'], function (landing) {
+  'use strict';
+
   console.log('APP INITIALIZED');
-  LandingP.init();
+
+  landing.init();
 });

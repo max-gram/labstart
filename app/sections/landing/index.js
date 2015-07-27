@@ -1,24 +1,19 @@
-var Swiper = require('../../com/libs/swiper/swiper.js');
+define(['swiper'], function (swiper) {
+  // console.log('Landing file load');
 
-var LandingPage = {
-  init: function(){
-    this.setSwiper();
-  },
+  var landing = {
+    init: function(){
+      console.log('Landing Page Init');
+      var mySwiper = new Swiper ('.swiper-container', {
+        direction: 'horizontal',
+        loop: true,
+        pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+      });
+    },
 
-  setSwiper: function(){
-    var mySwiper = new Swiper ('.swiper-container', {
-      // Optional parameters
-      direction: 'horizontal',
-      loop: true,
+  };
 
-      // If we need pagination
-      pagination: '.swiper-pagination',
-
-      // Navigation arrows
-      nextButton: '.swiper-button-next',
-      prevButton: '.swiper-button-prev',
-    });
-  }
-};
-
-module.exports = LandingPage;
+  return landing;
+});

@@ -20,7 +20,7 @@ Pros & Cons of BrowserifyJS
 - Node-style module exporting. More readable syntax [ ES6 alike ]
 - NPM (168,872 packages as of Jul 27,2015)
 - Multiple versions of the same dependency
-- TTD (Unit-tests without browser)
+- TDD (Unit-tests without browser)
 - Larger and more active community
 - Ability to create isomorphic applications
 

@@ -5,7 +5,9 @@
     "normalize.css": "^3.0.3"
   },
   "devDependencies": {
+    "color-picker": "0.0.1",
     "detect-dom-ready": "^1.0.2",
+    "emitter": "0.0.1",
     "fs-extra": "^0.16.3",
     "glob": "^4.3.5",
     "grunt": "^0.4.5",
@@ -25,7 +27,10 @@
     "grunt-pngmin": "^0.6.4",
     "grunt-replace": "^0.8.0",
     "grunt-webfont": "^0.4.8",
+    "hexrgb": "0.0.2",
+    "jquery": "^2.1.4",
     "less-plugin-autoprefix": "^1.4.2",
-    "load-grunt-tasks": "^3.2.0"
+    "load-grunt-tasks": "^3.2.0",
+    "nearest-color": "^0.4.0"
   }
 }

@@ -143,7 +143,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('default',[
-    'check-modules',
+    // 'check-modules',
     'licensechecker',
     'clean:dev',
     'copy:dev',

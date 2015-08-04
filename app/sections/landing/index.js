@@ -1,24 +1,22 @@
-var Swiper = require('../../com/libs/swiper/swiper.js');
+var Hammer = require('../../com/libs/hammer/hammer.js');
 
 var LandingPage = {
   init: function(){
-    this.setSwiper();
+    this.setHammer();
   },
 
-  setSwiper: function(){
-    var mySwiper = new Swiper ('.swiper-container', {
-      // Optional parameters
-      direction: 'horizontal',
-      loop: true,
+  setHammer: function(){
+    var el = document.getElementById('hTest');
 
-      // If we need pagination
-      pagination: '.swiper-pagination',
+    var mc = new Hammer.Manager(el);
+    var swipe = new Hammer.Swipe({threshold: 0, velocity: 0.1});
+    mc.add([swipe]);
 
-      // Navigation arrows
-      nextButton: '.swiper-button-next',
-      prevButton: '.swiper-button-prev',
+    mc.on('swipeleft swiperight swipeup swipedown', function(ev) {
+      // alert(ev.type);
+      console.log(ev.type);
     });
-  }
+  },
 };
 
 module.exports = LandingPage;

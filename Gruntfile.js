@@ -10,8 +10,8 @@ module.exports = function(grunt) {
       src: 'app',
       dev: '.tmp',
       dist: 'release',
-      server: '127.0.0.1',
-      // server: '10.3.1.41',
+      // server: '127.0.0.1',
+      server: '10.3.1.41',
       port: 9000,
     },
 
@@ -143,7 +143,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('default',[
-    'check-modules',
+    //'check-modules',
     'licensechecker',
     'clean:dev',
     'copy:dev',

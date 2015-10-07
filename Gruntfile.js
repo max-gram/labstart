@@ -1,3 +1,6 @@
+var _sass = require('node-sass');
+var importOnce = require('node-sass-import-once');
+
 module.exports = function(grunt) {
   'use strict';
 
@@ -11,27 +14,7 @@ module.exports = function(grunt) {
       dev: '.tmp',
       dist: 'release',
       server: '127.0.0.1',
-      // server: '10.3.1.41',
       port: 9000,
-    },
-
-    licensechecker: {
-      options: {
-        'warn': true,
-        'outFile': null,
-        'acceptable': [
-          'MIT',
-          'MIT/X11',
-          'BSD',
-          'ISC',
-          'BSD-3'
-        ],
-        'include': [
-          'dependencies',
-          'devDependencies',
-          'peerDependencies'
-        ]
-      }
     },
 
     clean: {
@@ -39,91 +22,52 @@ module.exports = function(grunt) {
       dist: ['<%= config.dist %>']
     },
 
-    copy:{
-      dev:{
-        files: [
-          {expand: false, src: ['<%= config.src %>/index.html'], dest: '<%= config.dev %>/index.html', filter: 'isFile'},
-          {expand: false, src: ['<%= config.src %>/com/libs/require.js'], dest: '<%= config.dev %>/js/require.js', filter: 'isFile'},
-        ]
-      },
-
-      dist:{
-        'src': '<%= config.src %>/index.html',
-        'dest': '<%= config.dist %>/index.html',
-        'filter': 'isFile'
-      }
-    },
-
-    less: {
-      dev: {
-        'options': {
-          'plugins' : [ new (require('less-plugin-autoprefix'))({browsers : [ "last 2 versions" ]}) ],
-          'compress': true,
-          'cleancss': false,
-          'sourceMap': true,
-          'sourceMapFilename': '<%= config.dev %>/css/main.css.map',
-          'sourceMapURL': 'main.css.map',
-          'sourceMapBasepath': '<%= config.dev %>',
-          'sourceMapRootpath': '/'
-        },
-        'files': {
-          '<%= config.dev %>/css/main.css': '<%= config.src %>/com/less/main.less'
-        },
-      },
-      dist: {
-        'options': {
-          'plugins' : [ new (require('less-plugin-autoprefix'))({browsers : [ "last 2 versions" ]}) ],
-          'compress': true,
-          'cleancss': true,
-        },
-        'files': {
-          '<%= config.dist %>/css/main.css': '<%= config.src %>/com/less/main.less'
-        }
-      }
-    },
-
-    connect: {
-      devServer: {
-        'options': {
-          'base': '<%= config.dev %>/',
-          'port': '<%= config.port %>',
-          'hostname': '<%= config.server %>',
-          'keepalive': true
-        }
-      }
-    },
-
-    requirejs: {
-      compile: {
-        options: {
-          baseUrl: '.',
-          appDir: './app',
-          dir: './.tmp',
-          mainConfigFile: './app/index.js',
-          optimize: 'uglify',
-          preserveLicenseComments: true,
-          useStrict: true,
-          removeCombined: true
-        }
-      }
-    },
-
-    watch: {
+    sass: {
       options: {
-        livereload: true
+        sourceMap: true,
+        includePaths: [
+          '<%= config.src %>',
+        ],
+        outputStyle: 'expanded',
       },
-      'less': {
-        'files': ['<%= config.src %>/**/*.less'],
-        'tasks': ['less:dev']
-      },
+      dev: {
+        files: [{
+          expand: true,
+          cwd: './',
+          dest: '<%= config.dev %>/css/',
+          src: [
+            '<%= config.src %>/**/*.scss',
+          ],
+          ext: '.css'
+        }]
+      }
     },
   // CONFIG END
   });
 
-  grunt.registerTask('default',[
+  grunt.registerTask('foo', '...', function(arg1, arg2) {
+    var result = _sass.renderSync({
+      // file: './app/com/scss/main.scss',
+      outputStyle: 'expanded',
+      sourceMap: true,
+      includePaths: [ './app/scss/', './app/sections/landing/style.scss' ],
+      importer: importOnce,
+      importOnce: {
+        index: false,
+        css: false,
+        bower: false
+      },
+      outFile: './.tmp/css/output.css'
+    });
+
+    console.log(result.css.toString());
+    // console.log(result.map);
+    // console.log(result.stats);
+  });
+
+  grunt.registerTask('css', [
     'clean:dev',
-    'requirejs',
-    'newer:less:dev',
-    'connect',
+    // 'foo'
+    'sass',
   ]);
 };

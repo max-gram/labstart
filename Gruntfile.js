@@ -29,6 +29,13 @@ module.exports = function(grunt) {
           '<%= config.src %>',
         ],
         outputStyle: 'expanded',
+
+        importer: importOnce,
+        importOnce: {
+          index: true,
+          // css: false,
+          // bower: false
+        },
       },
       dev: {
         files: [{
@@ -45,25 +52,25 @@ module.exports = function(grunt) {
   // CONFIG END
   });
 
-  grunt.registerTask('foo', '...', function(arg1, arg2) {
-    var result = _sass.renderSync({
-      // file: './app/com/scss/main.scss',
-      outputStyle: 'expanded',
-      sourceMap: true,
-      includePaths: [ './app/scss/', './app/sections/landing/style.scss' ],
-      importer: importOnce,
-      importOnce: {
-        index: false,
-        css: false,
-        bower: false
-      },
-      outFile: './.tmp/css/output.css'
-    });
+  // grunt.registerTask('foo', '...', function(arg1, arg2) {
+  //   var result = _sass.renderSync({
+  //     // file: './app/com/scss/main.scss',
+  //     outputStyle: 'expanded',
+  //     sourceMap: true,
+  //     includePaths: [ './app/scss/', './app/sections/landing/style.scss' ],
+  //     importer: importOnce,
+  //     importOnce: {
+  //       index: false,
+  //       css: false,
+  //       bower: false
+  //     },
+  //     outFile: './.tmp/css/output.css'
+  //   });
 
-    console.log(result.css.toString());
-    // console.log(result.map);
-    // console.log(result.stats);
-  });
+  //   console.log(result.css.toString());
+  //   // console.log(result.map);
+  //   // console.log(result.stats);
+  // });
 
   grunt.registerTask('css', [
     'clean:dev',

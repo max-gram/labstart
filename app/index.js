@@ -5,6 +5,7 @@ requirejs.config({
     'requirejs': './com/libs/require',
     'swiper': './com/libs/swiper/swiper',
     'landing': './sections/landing/index',
+    'page': './sections/landing/page',
   },
 
   modules: [{

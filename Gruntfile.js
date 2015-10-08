@@ -1,6 +1,8 @@
 var _sass = require('node-sass');
 var importOnce = require('node-sass-import-once');
 
+console.log(importOnce)
+
 module.exports = function(grunt) {
   'use strict';
 
@@ -25,26 +27,34 @@ module.exports = function(grunt) {
     sass: {
       options: {
         sourceMap: true,
-        includePaths: [
-          '<%= config.src %>',
-        ],
+        // includePaths: [
+        //   '<%= config.src %>/com/scss/',
+        //   '<%= config.src %>/sections/landing',
+        //   '<%= config.src %>/sections/page',
+        // ],
+        // files: './app/com/scss/main.scss',
         outputStyle: 'expanded',
+        // importer: function(url, prev, done) {
+        //   console.log('->> ', url) //, prev);
+        // },
 
         importer: importOnce,
-        importOnce: {
-          index: true,
-          // css: false,
-          // bower: false
-        },
+        // importOnce: {
+        //   // index: true,
+        //   // css: false,
+        //   // bower: false
+        // },
       },
       dev: {
+        // files: {'./app/com/scss/main.scss': './.tmp/out/main.css'}
         files: [{
           expand: true,
           cwd: './',
           dest: '<%= config.dev %>/css/',
-          src: [
-            '<%= config.src %>/**/*.scss',
-          ],
+          src: './app/com/scss/main.scss',
+          // src: [
+          //   '<%= config.src %>/**/*.scss',
+          // ],
           ext: '.css'
         }]
       }
@@ -52,29 +62,34 @@ module.exports = function(grunt) {
   // CONFIG END
   });
 
-  // grunt.registerTask('foo', '...', function(arg1, arg2) {
-  //   var result = _sass.renderSync({
-  //     // file: './app/com/scss/main.scss',
-  //     outputStyle: 'expanded',
-  //     sourceMap: true,
-  //     includePaths: [ './app/scss/', './app/sections/landing/style.scss' ],
-  //     importer: importOnce,
-  //     importOnce: {
-  //       index: false,
-  //       css: false,
-  //       bower: false
-  //     },
-  //     outFile: './.tmp/css/output.css'
-  //   });
+  grunt.registerTask('foo', '...', function(arg1, arg2) {
+    var result = _sass.renderSync({
+      file: './app/com/scss/main.scss',
+      outputStyle: 'expanded',
+      sourceMap: true,
+      // importer: function(url, prev, done) {
+      //   console.log('->> ', url) //, prev);
+      // },
 
-  //   console.log(result.css.toString());
-  //   // console.log(result.map);
-  //   // console.log(result.stats);
-  // });
+
+      // includePaths: [ './app/scss/', './app/sections/landing/style.scss' ],
+      importer: importOnce,
+      // importOnce: {
+      //   index: false,
+      //   css: false,
+      //   bower: false
+      // },
+      outFile: './.tmp/css/output.css'
+    });
+
+    console.log( result.css.toString() );
+    // console.log(result.map);
+    // console.log(result.stats);
+  });
 
   grunt.registerTask('css', [
     'clean:dev',
     // 'foo'
-    'sass',
+    'sass:dev',
   ]);
 };

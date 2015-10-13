@@ -51,10 +51,11 @@ module.exports = function(grunt) {
           expand: true,
           cwd: './',
           dest: '<%= config.dev %>/css/',
-          src: './app/com/scss/main.scss',
-          // src: [
-          //   '<%= config.src %>/**/*.scss',
-          // ],
+          // src: './app/com/scss/main.scss',
+          src: [
+            './app/com/scss/main.scss',
+            './app/com/scss/sub.scss',
+          ],
           ext: '.css'
         }]
       }

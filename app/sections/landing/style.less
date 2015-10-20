@@ -1,20 +1,41 @@
-.swiper-container {
-    position: absolute;
-    top:50%;
-    left:50%;
-    width: 600px;
-    height: 300px;
-    transform: translate(-50%, -50%);
+#container{
+  position: absolute;
+  width: 100%;
+  height: 100%;
 
-    .swiper-slide{
-      &.s1{
-        background-color: red;
-      }
-      &.s2{
-        background-color: green;
-      }
-      &.s3{
-        background-color: blue;
-      }
-    }
+  p{
+    margin:0;
+  }
+
+  .screen1,
+  .screen2,
+  .screen3,
+  .screen4,
+  .screen5{
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+
+  .screen1{
+    background-color: red;
+    // z-index: 5;
+  }
+  .screen2{
+    background-color: green;
+    // z-index: 4;
+  }
+  .screen3{
+    background-color: blue;
+    // z-index: 3;
+  }
+  .screen4{
+    background-color: yellow;
+    // z-index: 2;
+  }
+  .screen5{
+    background-color: grey;
+    // z-index: 1;
+  }
 }
